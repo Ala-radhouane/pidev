@@ -1,0 +1,12 @@
+{% extends "@Hunter/Default/admin.html.twig" %}
+{% block container %}
+
+<div class="widget-box">
+{{ form(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+</div>
+    <div class="promo-line">
+        <a class="button secondary" href="{{ path('hunter_afficher') }}" > <p style="color: white">Afficher Produit</p> </a>
+    </div>
+
+{% endblock %}

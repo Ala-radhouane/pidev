@@ -1,0 +1,150 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Nos Formations de chasse</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Vous trouverer ici les formations de chasse!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+    {%  block filter %}
+        <!-- SECTION FILTERS BAR -->
+        <div class="section-filters-bar v6">
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <form method="post">
+            <div class="section-filters-bar-actions">
+                <!-- FORM -->
+
+                <input type="text" id="profile-social-question-3" name="search" placeholder="rechercher une formation">
+                <button class="button secondary popup-event-creation-trigger">rechercher</button>
+
+                <!-- /FORM -->
+            </div>
+            </form>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <div class="section-filters-bar-actions">
+                <!-- BUTTON -->
+                <p>Nb: {{ count }} Formation existantes</p>
+                <!-- /BUTTON -->
+            </div>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+        </div>
+        <!-- /SECTION FILTERS BAR -->
+
+    {% endblock %}
+
+    {% block produits %}
+
+        {% for f in formations %}
+
+            <!-- EVENT PREVIEW -->
+            <div class="event-preview">
+                <!-- EVENT PREVIEW COVER -->
+                <figure class="event-preview-cover liquid" style="background: url(&quot;img/cover/47.jpg&quot;) center center / cover no-repeat;">
+                    <img src="{{   asset('template/img/cover/formation.jpg')}}" alt="cover-47" style="display: none;">
+                </figure>
+                <!-- /EVENT PREVIEW COVER -->
+
+                <!-- EVENT PREVIEW INFO -->
+                <div class="event-preview-info">
+                    <!-- EVENT PREVIEW INFO TOP -->
+                    <div class="event-preview-info-top">
+
+
+                        <!-- EVENT PREVIEW TITLE -->
+                        <p class="event-preview-title popup-event-information-trigger">{{ f.nom }}</p>
+                        <!-- /EVENT PREVIEW TITLE -->
+
+                        <!-- EVENT PREVIEW TIMESTAMP -->
+                        <p class="event-preview-timestamp">Assisté par : <span class="bold">{{ f.formateur }}</span></p>
+
+                        <p class="event-preview-timestamp">Du  : <span class="bold">{{ f.dateDebut|date("m/d/Y") }}</span> jusqu'à <span class="bold">{{ f.dateFin|date("m/d/Y") }}</span></p>
+                        <!-- /EVENT PREVIEW TIMESTAMP -->
+
+                        <!-- EVENT PREVIEW TEXT -->
+                        <p class="event-preview-text">Type : {{ f.type }}.</p>
+                        <!-- /EVENT PREVIEW TEXT -->
+                    </div>
+                    <!-- /EVENT PREVIEW INFO TOP -->
+
+                    <!-- EVENT PREVIEW INFO BOTTOM -->
+                    <div class="event-preview-info-bottom">
+                        <!-- DECORATED TEXT -->
+                        <div class="decorated-text">
+                            <!-- DECORATED TEXT ICON -->
+                            <svg class="decorated-text-icon icon-pin">
+                                <use xlink:href="#svg-pin"></use>
+                            </svg>
+                            <!-- /DECORATED TEXT ICON -->
+
+                            <!-- DECORATED TEXT CONTENT -->
+                            <p class="decorated-text-content">{{ f.lieu }}</p>
+                            <!-- /DECORATED TEXT CONTENT -->
+                        </div>
+                        <!-- /DECORATED TEXT -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list user-avatar-list">
+                                <!-- USER AVATAR -->
+                                <p class="event-preview-timestamp">Assisté par : <span class="bold">{{ f.nombrePlaces }} places disponible</span></p>
+                                <!-- /USER AVATAR -->
+
+                            </div>
+                            <!-- /META LINE LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <p class="meta-line-text"></p>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        {% if f.bane == false %}
+                            <a href="{{ path('details_formations', { 'id': f.id }) }}" class="button white white-tertiary">Consulter Détails</a>
+                        {% else %}
+                            <br>
+                            <br>
+                            <p href="#" style="color: red;">Vous ne pouvez pas voir le contenu de cette formation</p>
+
+                        {% endif %}
+                        <!-- BUTTON -->
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /EVENT PREVIEW INFO BOTTOM -->
+                </div>
+                <!-- /EVENT PREVIEW INFO -->
+            </div>
+            <!-- /EVENT PREVIEW -->
+
+
+
+        {% endfor %}
+
+    {% endblock %}
+

@@ -1,0 +1,60 @@
+{% extends "@Hunter/Default/index.html.twig" %}
+{% block container %}
+<div class="widget-box">
+    {{ form (f) }}
+</div>
+
+    <div class="totals-line-list separator-bottom">
+        <h3>Valider mon panier</h3>
+
+        <table class="table table-cart split-rows">
+            <thead>
+            <tr>
+                <th>id produit</th>
+                <th>nom</th>
+                <th>prix</th>
+                <th>quantite</th>
+                <th>stock</th>
+                <th>category</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.product.id }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price * item.quantity }} TND</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.stock }}</td>
+                    <td>{{ item.product.category }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total :</td>
+                <td>{{ total }} TND</td>
+                <td>
+                </td>
+            </tr>
+
+            </tfoot>
+        </table>
+
+
+
+
+        <h4>Adresse de livraison</h4>
+        {% for livs in liv %}
+
+        <label class="accordion-trigger-linked">
+            <input type="radio" name="radio" id="radioadresse" value="option1" checked="">
+            {{ livs.adresse }},{{ livs.ville }},{{ livs.codepostal }}
+            <a href="{{ path('hunter_adresseremove',{'id':livs.id}) }}"><h6 style="color: red">delete</h6></a>
+        </label>
+        {% endfor %}
+        <a class="button primary " style="width: 20%" href="#">Payer</a>
+
+    </div>
+{% endblock %}

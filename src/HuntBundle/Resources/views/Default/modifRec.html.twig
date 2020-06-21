@@ -1,0 +1,118 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+
+ {% block header %}
+
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Espace de reclamations</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Vous pouvez ici modifier vos reclamations !</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+ {% endblock %}
+
+ {% block filter %}
+
+ {% endblock %}
+
+ {% block produits %}
+
+ {% endblock %}
+
+
+
+{% block reclamer %}
+
+<br>
+<br>
+
+ {% if app.session.flashBag.has('success') %}
+         <div class="alert alert-success">
+             {% for msg in app.session.flashBag.get('success') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+         <div class="alert alert-danger">
+             {% for msg in app.session.flashBag.get('error') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+<br>
+<br>
+
+<div class="quick-post medium">
+    <!-- QUICK POST HEADER -->
+    <div class="quick-post-header">
+        <!-- QUICK POST HEADER TITLE -->
+        <p class="quick-post-header-title">Modifier cette reclamation : </p>
+        <!-- /QUICK POST HEADER TITLE -->
+    </div>
+    <!-- /QUICK POST HEADER -->
+
+    <!-- QUICK POST BODY -->
+    <div class="quick-post-body">
+        <!-- FORM -->
+        <form class="form" method="post">
+            <!-- FORM ROW -->
+            <div class="form-row">
+                <!-- FORM ITEM -->
+                <div class="form-item">
+
+                    <!-- FORM TEXTAREA -->
+                    <input type="text" id="profile-social-question-3" class="form-textarea" value=" {{ rec.sujet }}"  name="sujet">
+                    <br><br>
+                    <div class="form-textarea">
+                        <textarea id="forum-post-text" name="reclamation" >{{ rec.reclamation }}</textarea>
+                        <!-- FORM TEXTAREA LIMIT TEXT -->
+                        <p class="form-textarea-limit-text">998/1000</p>
+                        <!-- /FORM TEXTAREA LIMIT TEXT -->
+                    </div>
+                    <!-- /FORM TEXTAREA -->
+                </div>
+                <!-- /FORM ITEM -->
+            </div>
+
+             <div class="quick-post-footer">
+        <!-- QUICK POST FOOTER ACTIONS -->
+        <div class="quick-post-footer-actions">
+
+        </div>
+        <!-- /QUICK POST FOOTER ACTIONS -->
+
+        <!-- QUICK POST FOOTER ACTIONS -->
+        <div class="quick-post-footer-actions">
+            <!-- BUTTON -->
+
+            <!-- /BUTTON -->
+
+            <!-- BUTTON -->
+            <button class="button secondary">Reclamer</button>
+            <!-- /BUTTON -->
+        </div>
+        <!-- /QUICK POST FOOTER ACTIONS -->
+    </div>
+
+            <!-- /FORM ROW -->
+        </form>
+        <!-- /FORM -->
+    </div>
+    <!-- /QUICK POST BODY -->
+
+    <!-- QUICK POST FOOTER -->
+
+    <!-- /QUICK POST FOOTER -->
+</div>
+
+{% endblock %}

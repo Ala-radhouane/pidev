@@ -1,0 +1,216 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+ <!-- SECTION BANNER -->
+ <div class="section-banner">
+  <!-- SECTION BANNER ICON -->
+  <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+  <!-- /SECTION BANNER ICON -->
+
+  <!-- SECTION BANNER TITLE -->
+  <p class="section-banner-title">Formation choisi</p>
+  <!-- /SECTION BANNER TITLE -->
+
+  <!-- SECTION BANNER TEXT -->
+  <p class="section-banner-text"> ici vous pouvez consulter les details d'une formation  !</p>
+  <!-- /SECTION BANNER TEXT -->
+ </div>
+ <!-- /SECTION BANNER -->
+ <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+         <div class="alert alert-success">
+             {% for msg in app.session.flashBag.get('success') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+    {%  block filter %}
+
+
+    {% endblock %}
+
+
+    {% block reclamer %}
+
+
+
+        <div class="grid-column">
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                <!-- WIDGET BOX SETTINGS -->
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap" style="position: relative;">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown" style="position: absolute; z-index: 9999; top: 30px; right: 9px; opacity: 0; visibility: hidden; transform: translate(0px, -20px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <p class="simple-dropdown-link">Widget Settings</p>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                <!-- /WIDGET BOX SETTINGS -->
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Fomation sélectionné</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- PARAGRAPH -->
+                    <p class="paragraph"></p>
+                    <!-- /PARAGRAPH -->
+
+                    <!-- INFORMATION LINE LIST -->
+                    <div class="information-line-list">
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Titre:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.nom }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Assisté Par:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.formateur }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Date Debut:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.dateDebut|date("m/d/Y") }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Date Fin:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.dateFin|date("m/d/Y") }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Type:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.type }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Nombre de place:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ formation.nombrePlaces }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+
+                        <div class="decorated-text">
+                            <!-- DECORATED TEXT ICON -->
+                            <svg class="decorated-text-icon icon-pin">
+                                <use xlink:href="#svg-pin"></use>
+                            </svg>
+                            <!-- /DECORATED TEXT ICON -->
+
+                            <!-- DECORATED TEXT CONTENT -->
+                            <p class="decorated-text-content">{{ formation.lieu }}</p>
+                            <!-- /DECORATED TEXT CONTENT -->
+                        </div>
+                        <br>
+                        <br>
+                        <div class="poll-box-actions">
+
+                            <center>
+                            {% if count > 0 %}
+                                <a href="{{ path('annuler_reservation', { 'id': formation.id }) }}"  class="button big white">Annuler inscription!</a>
+                            {% else %}
+                                {% if formation.nombrePlaces > 0 %}
+                                <a href="{{ path('reserver_formation', { 'id': formation.id }) }}" class="button big secondary">S'inscrire!</a>
+                                {% else %}
+                                    <a href="#" class="button big danger">Pas de places disponible</a>
+                                {% endif %}
+                            {% endif %}
+
+
+
+                             </center>
+
+                            <center>
+
+                            </center>
+
+                            <!-- /BUTTON -->
+
+                            <!-- BUTTON -->
+                            <!-- /BUTTON -->
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- /INFORMATION LINE LIST -->
+
+                </div>
+                <!-- /WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
+
+            <br><br>
+            <!-- WIDGET BOX -->
+
+            <!-- /WIDGET BOX -->
+        </div>
+
+    {% endblock %}
+
+
+    {% block produits %}
+
+    {% endblock %}
+
+

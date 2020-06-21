@@ -1,0 +1,22 @@
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /forums
+
+formation:
+    resource: "@FormationBundle/Resources/config/routing.yml"
+    prefix:   /formation
+
+hunt:
+    resource: "@HuntBundle/Resources/config/routing.yml"
+    prefix:   /hunt
+
+fos:
+    resource: "@FOSBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

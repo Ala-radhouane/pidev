@@ -1,0 +1,195 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+
+{% block header %}
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Reclamations</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Vous trouverer ici vos reclamations</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+
+    {%  block filter %}
+        <!-- SECTION FILTERS BAR -->
+        <div class="section-filters-bar v6">
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <div class="section-filters-bar-actions">
+                <!-- FORM -->
+
+                <!-- /FORM -->
+            </div>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <div class="section-filters-bar-actions">
+                <!-- BUTTON -->
+                <a href="{{ path('hunt_prorec') }}" class="button secondary popup-event-creation-trigger">+ Ajouter une reclamation</a>
+                <!-- /BUTTON -->
+            </div>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+        </div>
+        <!-- /SECTION FILTERS BAR -->
+
+    {% endblock %}
+
+{% block reclamer %}
+
+    <div class="table table-forum-discussion">
+        <!-- TABLE HEADER -->
+        <div class="table-header">
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Reclamations</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Modifier</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column centered padded-medium">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Supprimer</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+
+            <!-- TABLE HEADER COLUMN -->
+            <div class="table-header-column padded-big-left">
+                <!-- TABLE HEADER TITLE -->
+                <p class="table-header-title">Traité Ou Non ?</p>
+                <!-- /TABLE HEADER TITLE -->
+            </div>
+            <!-- /TABLE HEADER COLUMN -->
+        </div>
+        <!-- /TABLE HEADER -->
+
+        <!-- TABLE BODY -->
+        <div class="table-body">
+            {% for rec in reclamations %}
+            <!-- TABLE ROW -->
+
+            <div class="table-row medium">
+                <!-- TABLE COLUMN -->
+                <div class="table-column">
+                    <!-- DISCUSSION PREVIEW -->
+                    <div class="discussion-preview">
+                        <!-- DISCUSSION PREVIEW TITLE -->
+                        <a class="discussion-preview-title" href="forums-discussion.html">{{ rec.reclamation }}</a>
+                        <!-- /DISCUSSION PREVIEW TITLE -->
+
+                        <!-- DISCUSSION PREVIEW META -->
+                        <div class="discussion-preview-meta">
+                            <!-- DISCUSSION PREVIEW META TEXT -->
+                            <p class="discussion-preview-meta-text">Sujet:</p>
+                            <!-- /DISCUSSION PREVIEW META TEXT -->
+
+                            <!-- USER AVATAR -->
+                            <a class="user-avatar micro no-border" href="profile-timeline.html">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/01.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </a>
+                            <!-- /USER AVATAR -->
+
+                            <!-- DISCUSSION PREVIEW META TEXT -->
+                            <p class="discussion-preview-meta-text"><a href="#">{{ rec.sujet }}</a> </p>
+                            <!-- /DISCUSSION PREVIEW META TEXT -->
+                        </div>
+                        <!-- /DISCUSSION PREVIEW META -->
+                    </div>
+                    <!-- /DISCUSSION PREVIEW -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <a href="{{ path('modif_rec', { 'id': rec.id }) }}" class="profile-header-info-action button primary">Modifier </a>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column centered padded-medium">
+                    <!-- TABLE TITLE -->
+                    <a href="{{ path('supprimerRec', { 'id': rec.id }) }}" class="button white white-tertiary">Supprimer</a>
+                    <!-- /TABLE TITLE -->
+                </div>
+                <!-- /TABLE COLUMN -->
+
+                <!-- TABLE COLUMN -->
+                <div class="table-column padded-big-left">
+                    <!-- USER STATUS -->
+                    <div class="user-status">
+                        <!-- USER STATUS AVATAR -->
+
+                        <!-- /USER STATUS AVATAR -->
+
+                        <!-- USER STATUS TITLE -->
+                        <p class="user-status-title"><a class="bold" href="profile-timeline.html">
+                                {% if rec.traite|number_format ==0 %}
+                                   Pas encore traité
+                                {% else %}
+                                    traité
+                                {% endif %}</a></p>
+                        <!-- /USER STATUS TITLE -->
+
+                        <!-- USER STATUS TEXT -->
+
+                        <!-- /USER STATUS TEXT -->
+                    </div>
+                    <!-- /USER STATUS -->
+                </div>
+                <!-- /TABLE COLUMN -->
+            </div>
+            <!-- /TABLE ROW -->
+
+            {% endfor %}
+
+
+        </div>
+        <!-- /TABLE BODY -->
+    </div>
+
+{% endblock %}
+
+
+
+{% block produits %}
+
+{% endblock %}

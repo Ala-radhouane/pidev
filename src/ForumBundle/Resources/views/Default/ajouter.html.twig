@@ -1,0 +1,128 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Forums</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Vous trouverer ici toutes les forums!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+            <div class="alert alert-danger">
+                {% for msg in app.session.flashBag.get('error') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+    {%  block filter %}
+
+        <div class="widget-box">
+            <!-- WIDGET BOX SETTINGS -->
+            <div class="widget-box-settings">
+                <!-- POST SETTINGS WRAP -->
+                <div class="post-settings-wrap" style="position: relative;">
+                    <!-- POST SETTINGS -->
+                    <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                        <!-- POST SETTINGS ICON -->
+                        <svg class="post-settings-icon icon-more-dots">
+                            <use xlink:href="#svg-more-dots"></use>
+                        </svg>
+                        <!-- /POST SETTINGS ICON -->
+                    </div>
+                    <!-- /POST SETTINGS -->
+
+                    <!-- SIMPLE DROPDOWN -->
+                    <div class="simple-dropdown widget-box-post-settings-dropdown" style="position: absolute; z-index: 9999; top: 30px; right: 9px; opacity: 0; visibility: hidden; transform: translate(0px, -20px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                        <!-- SIMPLE DROPDOWN LINK -->
+                        <p class="simple-dropdown-link">Widget Settings</p>
+                        <!-- /SIMPLE DROPDOWN LINK -->
+                    </div>
+                    <!-- /SIMPLE DROPDOWN -->
+                </div>
+                <!-- /POST SETTINGS WRAP -->
+            </div>
+            <!-- /WIDGET BOX SETTINGS -->
+
+            <!-- WIDGET BOX TITLE -->
+            <p class="widget-box-title">Formulaire de d'ajout forum:</p>
+            <!-- /WIDGET BOX TITLE -->
+
+            <!-- WIDGET BOX CONTENT -->
+            <div class="widget-box-content">
+                <!-- INFORMATION LINE LIST -->
+                <div class="information-line-list">
+                    <form method="post">
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Description:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <textarea id="quick-post-text" name="description" placeholder="Hi Marina! Share your post here..."></textarea>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Type:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <input type="text" id="post-reply" name="type" placeholder="Type de chasse">
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+
+
+
+
+
+
+                        <button class="button small secondary">Ajouter</button>
+                    </form>
+                    <!-- INFORMATION LINE -->
+                    <div class="information-line">
+
+                    </div>
+                    <!-- /INFORMATION LINE -->
+                </div>
+                <!-- /INFORMATION LINE LIST -->
+            </div>
+            <!-- /WIDGET BOX CONTENT -->
+        </div>
+
+    {% endblock %}
+
+    {% block produits %}
+
+
+
+    {% endblock %}
+

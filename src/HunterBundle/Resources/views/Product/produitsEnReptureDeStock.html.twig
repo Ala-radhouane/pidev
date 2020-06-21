@@ -1,0 +1,69 @@
+{% extends "@Hunter/Default/admin.html.twig" %}
+{% block container %}
+
+    <div style="display: flex;justify-content: space-around;">
+        <a href="{{ path('hunter_afficher') }}" style="width: 20%">
+            <button type="button" class="btn-primary " style="margin: 10px 0; width:100%" > All Products </button>
+        </a>
+        <a href="{{ path('hunter_produitsHorsStock') }}" style="width: 20%">
+            <button type="button" class="btn-danger " style="margin: 10px 0; width:100%" > Products out of Stock</button>
+        </a>
+
+        <a href="{{ path('hunter_produitsEnReptureDeStock') }}" style="width: 20%">
+            <button type="button" class="btn-info " style="margin: 10px 0;width:100%" > lack of product</button>
+        </a>
+    </div>
+
+    <table class="table table-cart split-rows">
+        <thead>
+        <tr>
+            <th>id produit</th>
+            <th>image</th>
+            <th>nom</th>
+            <th>prix</th>
+            <th>stock</th>
+            <th>description</th>
+            <th>category</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for  product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td><img src="{{ asset('images/') }}{{ product.nomImage }}"style="width: 50px;height: 50px"></td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price  }} TND</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.category }}</td>
+                <td>
+                    <a class="button white small-space" href="{{ path('hunter_editproduct', { 'id': product.id }) }}">Edit product</a>
+                </td>
+                <td>
+                    <a class="button white small-space" href="{{ path('hunter_supprimerProduits', { 'id': product.id }) }}">delete product</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <tfoot>
+        <tr>
+
+            <td class="promo-line">
+                <a class="button secondary" href="{{ path('hunter_addproduct') }}"><p style="color: white">Add product </p></a>
+            </td>
+
+            <td>
+                <div class="pagination">
+                    {{ knp_pagination_render(products) }}
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+
+    </table>
+
+
+{% endblock %}

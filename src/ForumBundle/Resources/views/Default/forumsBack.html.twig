@@ -1,0 +1,145 @@
+{% extends '@Hunt/Backend/layout.html.twig' %}
+
+{% block aside %}
+
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#dashboard"><i class="zmdi zmdi-home m-r-5"></i>Hunt-App</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane stretchRight active" id="dashboard">
+                <div class="menu">
+                    <ul class="list">
+                        <li>
+                            <div class="user-info">
+                                <div class="image"><a href="profile.html"><img src="{{   asset('template_back/assets/images/profile_av.jpg')}}" alt="User"></a></div>
+                                <div class="detail">
+                                    <h4>{{ user.username }}</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header">Menu</li>
+                        <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+                            <ul class="ml-menu">
+                                <li class="active"><a href="index.html">Réclamations</a> </li>
+                                <li><a href="{{ path('back_formations') }}">Formations</a></li>
+                                <li><a href="index2.html">Forums</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+{% endblock %}
+
+{% block title %}
+    <!-- Main Content -->
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <h2>Forums
+                        <small>Bienvenue -HUNT-APP </small>
+                    </h2>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="content">
+
+        <div class="container-fluid">
+
+
+            {% if app.session.flashBag.has('success') %}
+                <div class="alert alert-success">
+                    {% for msg in app.session.flashBag.get('success') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+
+
+            <!-- Hover Rows -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Tous les Reclamations</strong> <small> <code></code>  <code></code>.</small> </h2>
+                            <ul class="header-dropdown">
+                                <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else</a></li>
+                                    </ul>
+                                </li>
+                                <li class="remove">
+                                    <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Résolu</th>
+                                    <th>Publié par</th>
+                                    <th>Traité</th>
+                                    <th>SUPPRIMER</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for f in pubs %}
+                                    <tr>
+                                    <tr>
+                                        <td>{{ f.typeChasse }}</td>
+                                        <td>{{ f.description }}</td>
+                                        <td>
+                                            {% if f.resolu|number_format ==0 %}
+                                            Pas encore resolu
+                                            {% else %}
+                                            résolu
+                                            {% endif %}</a></p>
+                                        </td>
+                                    <td><a href="#">{{ f.iduser.username }}</a></td>
+                                        <td>
+                                            {% if f.resolu|number_format ==0 %}
+                                                <a href="{{ path('forum_resolu_back', { 'id': f.id }) }}"> set Résolu</a>
+                                            {% else %}
+                                             Déja Résolu
+                                            {% endif %}
+                                            </a>
+                                        </td>
+
+
+
+                                        <td><a href="{{ path('forum_supprimer', { 'id': f.id }) }}">Supprimer</a></td>
+                                    </tr>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Hover Rows -->
+        </div>
+    </section>
+{% endblock %}
+

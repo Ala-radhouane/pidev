@@ -1,0 +1,71 @@
+hunt_homepage:
+    path:     /
+    defaults: { _controller: HuntBundle:Default:index }
+
+hunt_prorec:
+    path:     /produitrec
+    defaults: { _controller: HuntBundle:Default:produitreclamations }
+
+reclamer:
+    path:     /reclamer/{id}
+    defaults: { _controller: HuntBundle:Default:reclamer }
+
+
+mes_reclamations:
+    path:     /mesreclamations
+    defaults: { _controller: HuntBundle:Default:mesreclamations }
+
+mes_reservations:
+    path:     /mesreservations
+    defaults: { _controller: HuntBundle:Default:mesreservations }
+
+supprimerRec:
+    path:     /supprimerrec/{id}
+    defaults: { _controller: HuntBundle:Default:supprimer }
+
+modif_rec:
+    path:     /modif/{id}
+    defaults: { _controller: HuntBundle:Default:modifRec }
+
+reserver_produit:
+    path:     /details/{id}
+    defaults: { _controller: HuntBundle:Default:reserver }
+
+admin_backend:
+    path:     /back/index
+    defaults: { _controller: HuntBundle:Default:indexAdmin }
+
+rec_backend:
+    path:     /back/reclamations
+    defaults: { _controller: HuntBundle:Default:recAdmin }
+
+supp_backend:
+    path:     /back/supprimer/{id}
+    defaults: { _controller: HuntBundle:Default:supprimerRec }
+
+traiter_backend:
+    path:     /back/traiter/{id}
+    defaults: { _controller: HuntBundle:Default:traiteRec }
+produitJson:
+    path:     /api/produit
+    defaults: { _controller: HuntBundle:Default:getProduits }
+produitByIdJson:
+    path:     /api/produitById/{id}
+    defaults: { _controller: HuntBundle:Default:getProduitById }
+addReservation:
+    path:     /api/addReservation/{idUser}/{idProduit}/{dateDebut}/{datefin}/{qt}
+    defaults: { _controller: HuntBundle:Default:AddReservation }
+getReclamations:
+    path:     /api/reclamations/{id}
+    defaults: { _controller: HuntBundle:Default:getReclamationsd }
+addReclamation:
+    path:     /api/rec/{idUser}/{sujet}/{rec}
+    defaults: { _controller: HuntBundle:Default:addReclamation }
+sendmail:
+    path:     /api/sendmail/{iduser}/{rec}
+    defaults: { _controller: HuntBundle:Default:sendmail }
+
+
+
+
+

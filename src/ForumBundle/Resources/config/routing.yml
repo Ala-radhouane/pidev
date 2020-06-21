@@ -1,0 +1,48 @@
+forum_homepage:
+    path:     /
+    defaults: { _controller: ForumBundle:Default:index }
+
+forum_details:
+    path:     /details/{id}
+    defaults: { _controller: ForumBundle:Default:details }
+
+
+forum_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: ForumBundle:Default:supprimerforum }
+
+forum_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: ForumBundle:Default:modifierforum }
+
+forum_ajouter:
+    path:     /ajouter
+    defaults: { _controller: ForumBundle:Default:ajouterforum }
+
+forum_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: ForumBundle:Default:supprimercomment }
+
+com_modifier:
+    path:     /modifierComment/{id}
+    defaults: { _controller: ForumBundle:Default:modifiercomment }
+
+forum_resolu:
+    path:     /resolu/{id}
+    defaults: { _controller: ForumBundle:Default:resolu }
+
+forum_resolu_back:
+    path:     /resoluback/{id}
+    defaults: { _controller: ForumBundle:Default:resoluBack }
+
+forum_evaluer:
+    path:     /evaluer/{id}
+    defaults: { _controller: ForumBundle:Default:evaluer }
+
+forum_supp:
+    path:     /supp/{id}
+    defaults: { _controller: ForumBundle:Default:supprimerBack }
+
+forum_back:
+    path:     /back/forums
+    defaults: { _controller: ForumBundle:Default:backForums }

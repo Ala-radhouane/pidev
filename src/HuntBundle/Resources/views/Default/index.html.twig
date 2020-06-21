@@ -1,0 +1,172 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+ <!-- SECTION BANNER -->
+ <div class="section-banner">
+  <!-- SECTION BANNER ICON -->
+  <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+  <!-- /SECTION BANNER ICON -->
+
+  <!-- SECTION BANNER TITLE -->
+  <p class="section-banner-title">Nos Produits de chasse</p>
+  <!-- /SECTION BANNER TITLE -->
+
+  <!-- SECTION BANNER TEXT -->
+  <p class="section-banner-text">Vous trouverer ici les produits de chasse!</p>
+  <!-- /SECTION BANNER TEXT -->
+ </div>
+ <!-- /SECTION BANNER -->
+ <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+         <div class="alert alert-success">
+             {% for msg in app.session.flashBag.get('success') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+         <div class="alert alert-danger">
+             {% for msg in app.session.flashBag.get('error') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+    {% endblock %}
+    {% endblock %}
+
+    {%  block filter %}
+     <!-- SECTION FILTERS BAR -->
+     <div class="section-filters-bar v6">
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <form method="post">
+       <div class="section-filters-bar-actions">
+        <!-- FORM -->
+
+        <input type="text" id="profile-social-question-3" name="search" placeholder="rechercher une formation">
+        <button class="button secondary popup-event-creation-trigger">rechercher</button>
+
+        <!-- /FORM -->
+       </div>
+      </form>
+      <!-- /SECTION FILTERS BAR ACTIONS -->
+
+      <!-- SECTION FILTERS BAR ACTIONS -->
+      <div class="section-filters-bar-actions">
+       <!-- BUTTON -->
+       <a href="{{ path('hunt_prorec') }}" class="button secondary popup-event-creation-trigger">+ Ajouter une reclamation</a>
+       <!-- /BUTTON -->
+      </div>
+      <!-- /SECTION FILTERS BAR ACTIONS -->
+     </div>
+     <!-- /SECTION FILTERS BAR -->
+
+    {% endblock %}
+
+ {% block produits %}
+
+{% for p in produits %}
+
+ <!-- EVENT PREVIEW -->
+ <div class="event-preview">
+
+
+  <!-- EVENT PREVIEW INFO -->
+  <div class="event-preview-info">
+   <!-- EVENT PREVIEW INFO TOP -->
+   <div class="event-preview-info-top">
+    <!-- DATE STICKER -->
+
+    <!-- /DATE STICKER -->
+
+    <!-- EVENT PREVIEW TITLE -->
+    <p class="event-preview-title popup-event-information-trigger">{{ p.titre }}</p>
+    <!-- /EVENT PREVIEW TITLE -->
+
+    <!-- EVENT PREVIEW TIMESTAMP -->
+    <p class="event-preview-timestamp"> <span class="bold"> Prix : {{ p.prix }}</span></p>
+    <!-- /EVENT PREVIEW TIMESTAMP -->
+
+    <!-- EVENT PREVIEW TEXT -->
+
+    <!-- /EVENT PREVIEW TEXT -->
+   </div>
+   <!-- /EVENT PREVIEW INFO TOP -->
+
+   <!-- EVENT PREVIEW INFO BOTTOM -->
+   <div class="event-preview-info-bottom">
+    <!-- DECORATED TEXT -->
+    <div class="decorated-text">
+     <!-- DECORATED TEXT ICON -->
+     <svg class="decorated-text-icon icon-pin">
+      <use xlink:href="#svg-pin"></use>
+     </svg>
+     <!-- /DECORATED TEXT ICON -->
+
+     <!-- DECORATED TEXT CONTENT -->
+     <p class="decorated-text-content"><span class="bold"> Quantité restantes pour aujourd'hui :</span> {{ p.quantite - p.nbr }} </p>
+
+     <p class="decorated-text-content"><span class="bold">  </p>
+     <!-- /DECORATED TEXT CONTENT -->
+    </div>
+    <!-- /DECORATED TEXT -->
+
+    <!-- META LINE -->
+    <div class="meta-line">
+     <!-- META LINE LIST -->
+     <div class="meta-line-list user-avatar-list">
+      <!-- USER AVATAR -->
+
+       <!-- /USER AVATAR CONTENT -->
+
+      <!-- /USER AVATAR -->
+
+      <!-- USER AVATAR -->
+      <div class="user-avatar micro no-stats">
+       <!-- USER AVATAR BORDER -->
+       <div class="user-avatar-border">
+        <!-- HEXAGON -->
+        <div class="hexagon-22-24"></div>
+        <!-- /HEXAGON -->
+       </div>
+       <!-- /USER AVATAR BORDER -->
+
+       <!-- USER AVATAR CONTENT -->
+       <div class="user-avatar-content">
+        <!-- HEXAGON -->
+
+        <!-- /HEXAGON -->
+       </div>
+       <!-- /USER AVATAR CONTENT -->
+      </div>
+      <!-- /USER AVATAR -->
+     </div>
+     <!-- /META LINE LIST -->
+
+     <!-- META LINE TEXT -->
+
+     <!-- /META LINE TEXT -->
+    </div>
+    <!-- /META LINE -->
+
+    <!-- BUTTON -->
+    <a href="{{ path('reserver_produit', { 'id': p.id }) }}" class="button twitch">Réserver ce produit</a>
+
+
+    <!-- /BUTTON -->
+   </div>
+
+   {{ socialButtons( {'googleplus':false, 'twitter':false, 'linkedin':false ,'pinterest':false} ) }}
+
+   <!-- /EVENT PREVIEW INFO BOTTOM -->
+  </div>
+  <!-- /EVENT PREVIEW INFO -->
+ </div>
+ <!-- /EVENT PREVIEW -->
+
+
+
+{% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,46 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+ <!-- SECTION BANNER -->
+ <div class="section-banner">
+  <!-- SECTION BANNER ICON -->
+  <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+  <!-- /SECTION BANNER ICON -->
+
+  <!-- SECTION BANNER TITLE -->
+  <p class="section-banner-title">Hunt App</p>
+  <!-- /SECTION BANNER TITLE -->
+
+  <!-- SECTION BANNER TEXT -->
+  <p class="section-banner-text">Bienvenue!</p>
+  <!-- /SECTION BANNER TEXT -->
+ </div>
+ <!-- /SECTION BANNER -->
+ <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+         <div class="alert alert-success">
+             {% for msg in app.session.flashBag.get('success') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+         <div class="alert alert-error">
+             {% for msg in app.session.flashBag.get('error') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+    {% endblock %}
+    {% endblock %}
+
+    {%  block filter %}
+
+    {% endblock %}
+
+    {% block produits %}
+
+
+    {% endblock %}
+

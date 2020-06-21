@@ -1,0 +1,15 @@
+{% extends "@Hunter/Default/index.html.twig" %}
+{% block container %}
+     <img src="{{ asset('images/') }}{{ product.nomImage }}"style="width: 470px;height: 310px">
+    <div class="sidebar-box-items">
+      <h3>  Name Product : {{ product.name }} </h3><br>
+
+       <h4> Price : {{ product.price }} TND  </h4><br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+            viverra maecenas accumsan lacus vel facilisis.</p>
+        Stock : {{ product.stock }} <br>
+        Category : {{ product.category }} <br>
+        <a class="button primary" href="{{ path( 'hunter_chart',{'id':product.id }) }}" >Ajouter au panier</a>
+    </div>
+{% endblock %}

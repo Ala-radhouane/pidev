@@ -1,0 +1,898 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+    <!-- SECTION BANNER -->
+    <div class="section-banner">
+        <!-- SECTION BANNER ICON -->
+        <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+        <!-- /SECTION BANNER ICON -->
+
+        <!-- SECTION BANNER TITLE -->
+        <p class="section-banner-title">Forums</p>
+        <!-- /SECTION BANNER TITLE -->
+
+        <!-- SECTION BANNER TEXT -->
+        <p class="section-banner-text">Vous trouverer ici les commentaire d'un forum!</p>
+        <!-- /SECTION BANNER TEXT -->
+    </div>
+    <!-- /SECTION BANNER -->
+    <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+            <div class="alert alert-danger">
+                {% for msg in app.session.flashBag.get('error') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+    {%  block filter %}
+
+
+
+        <div class="widget-box no-padding">
+            <!-- WIDGET BOX SETTINGS -->
+            <div class="widget-box-settings">
+                <!-- POST SETTINGS WRAP -->
+                <div class="post-settings-wrap" style="position: relative;">
+                    <!-- POST SETTINGS -->
+                    {% if p.iduser.id == user.id %}
+                    {% if p.resolu == 0 %}
+                        <a href="{{ path('forum_resolu', { 'id': p.id }) }}" class="button small void">Marquer comme résolu</a>
+
+                    {% else %}
+                        <p class="tag-item secondary" href="#">Résolu</p>
+                    {% endif %}
+                    {% else %}
+                        {% if p.resolu == 0 %}
+                            <p class="button small void">pas encore résolu</p>
+
+                        {% else %}
+                            <p class="tag-item secondary" href="#">Résolu</p>
+                        {% endif %}
+                    {% endif %}
+
+
+                        <!-- POST SETTINGS ICON -->
+
+                        <!-- /POST SETTINGS ICON -->
+
+                    <!-- /POST SETTINGS -->
+
+
+                    <!-- /SIMPLE DROPDOWN -->
+                </div>
+                <!-- /POST SETTINGS WRAP -->
+            </div>
+            <!-- /WIDGET BOX SETTINGS -->
+
+            <!-- WIDGET BOX STATUS -->
+            <div class="widget-box-status">
+                <!-- WIDGET BOX STATUS CONTENT -->
+                <div class="widget-box-status-content">
+                    <!-- USER STATUS -->
+                    <div class="user-status">
+                        <!-- USER STATUS AVATAR -->
+                        <a class="user-status-avatar" href="profile-timeline.html">
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar small no-outline">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <img class="hexagon-image-30-32" src="{{   asset('template/img/avatar/avatar.png')}}" style="width: 30px; height: 32px; position: relative;"><canvas width="30" height="32" style="position: absolute; top: 0px; left: 0px;"></canvas></img>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-16-18" style="width: 16px; height: 18px; position: relative;"><canvas width="16" height="18" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">26</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        </a>
+                        <!-- /USER STATUS AVATAR -->
+
+                        <!-- USER STATUS TITLE -->
+                        <p class="user-status-title medium"><a class="bold" href="#">{{ p.idUser.username }}</a> a ajouté  <span class="bold"> le forum</span></p>
+                        <!-- /USER STATUS TITLE -->
+
+                        <!-- USER STATUS TEXT -->
+                        <p class="user-status-text small">de type {{ p.typeChasse }} </p>
+                        <!-- /USER STATUS TEXT -->
+                    </div>
+                    <!-- /USER STATUS -->
+
+                    <!-- WIDGET BOX STATUS TEXT -->
+                    <p class="widget-box-status-text">{{ p.description }} </p>
+                    <!-- /WIDGET BOX STATUS TEXT -->
+
+
+
+                    <!-- CONTENT ACTIONS -->
+                    <div class="content-actions">
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LIST -->
+                                <div class="meta-line-list user-avatar-list">
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar micro no-stats">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar micro no-stats">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar micro no-stats">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar micro no-stats">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+
+                                    <!-- USER AVATAR -->
+                                    <div class="user-avatar micro no-stats">
+                                        <!-- USER AVATAR BORDER -->
+                                        <div class="user-avatar-border">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR BORDER -->
+
+                                        <!-- USER AVATAR CONTENT -->
+                                        <div class="user-avatar-content">
+                                            <!-- HEXAGON -->
+                                            <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                            <!-- /HEXAGON -->
+                                        </div>
+                                        <!-- /USER AVATAR CONTENT -->
+                                    </div>
+                                    <!-- /USER AVATAR -->
+                                </div>
+                                <!-- /META LINE LIST -->
+
+                                <!-- META LINE TEXT -->
+                                    <a href="{{ path('forum_evaluer', { 'id': p.id }) }}" class="meta-line-text">Evaluer</a>
+                                <!-- /META LINE TEXT -->
+                            </div>
+                            <!-- /META LINE -->
+                        </div>
+                        <!-- /CONTENT ACTION -->
+
+                        <!-- CONTENT ACTION -->
+                        <div class="content-action">
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE LINK -->
+                                <p class="meta-line-link">{{ count }} Comments</p>
+                                <!-- /META LINE LINK -->
+                            </div>
+                            <!-- /META LINE -->
+
+                            <!-- META LINE -->
+                            <div class="meta-line">
+                                <!-- META LINE TEXT -->
+
+                                <!-- /META LINE TEXT -->
+                            </div>
+                            <!-- /META LINE -->
+                        </div>
+                        <!-- /CONTENT ACTION -->
+                    </div>
+                    <!-- /CONTENT ACTIONS -->
+                </div>
+                <!-- /WIDGET BOX STATUS CONTENT -->
+            </div>
+            <!-- /WIDGET BOX STATUS -->
+        </div>
+
+            <br>
+            <br>
+
+    {% for c in comments   %}
+
+
+        <div class="widget-box no-padding">
+
+
+            <!-- WIDGET BOX STATUS -->
+            <div class="widget-box-status">
+                <!-- WIDGET BOX STATUS CONTENT -->
+                <div class="widget-box-status-content">
+                    <!-- USER STATUS -->
+                    <div class="user-status">
+                        <!-- USER STATUS AVATAR -->
+                        <a class="user-status-avatar" href="profile-timeline.html">
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar small no-outline">
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <img class="hexagon-image-30-32" src="{{   asset('template/img/avatar/avatar.png')}}" style="width: 30px; height: 32px; position: relative;"><canvas width="30" height="32" style="position: absolute; top: 0px; left: 0px;"></canvas></img>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+
+                                <!-- USER AVATAR PROGRESS -->
+                                <div class="user-avatar-progress">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-progress-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS -->
+
+                                <!-- USER AVATAR PROGRESS BORDER -->
+                                <div class="user-avatar-progress-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-border-40-44" style="width: 40px; height: 44px; position: relative;"><canvas width="40" height="44" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR PROGRESS BORDER -->
+
+                                <!-- USER AVATAR BADGE -->
+                                <div class="user-avatar-badge">
+                                    <!-- USER AVATAR BADGE BORDER -->
+                                    <div class="user-avatar-badge-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE BORDER -->
+
+                                    <!-- USER AVATAR BADGE CONTENT -->
+                                    <div class="user-avatar-badge-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-dark-16-18" style="width: 16px; height: 18px; position: relative;"><canvas width="16" height="18" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BADGE CONTENT -->
+
+                                    <!-- USER AVATAR BADGE TEXT -->
+                                    <p class="user-avatar-badge-text">26</p>
+                                    <!-- /USER AVATAR BADGE TEXT -->
+                                </div>
+                                <!-- /USER AVATAR BADGE -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        </a>
+                        <!-- /USER STATUS AVATAR -->
+
+                        <!-- USER STATUS TITLE -->
+                        <p class="user-status-title medium"><a class="bold" href="#">{{ c.idUser.username }}</a> a commenté  <span class="bold"></span></p>
+                        <!-- /USER STATUS TITLE -->
+
+                        <!-- USER STATUS TEXT -->
+                        <p class="user-status-text small">le {{ c.date|date("m/d/Y") }} </p>
+                        <!-- /USER STATUS TEXT -->
+                    </div>
+                    <!-- /USER STATUS -->
+
+                    <!-- WIDGET BOX STATUS TEXT -->
+                    <p class="widget-box-status-text">{{ c.commentaire }} </p>
+                    <!-- /WIDGET BOX STATUS TEXT -->
+                </div>
+                <!-- /CONTENT ACTIONS -->
+            </div>
+            <div class="content-actions">
+                <!-- CONTENT ACTION -->
+                <div class="content-action">
+
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE LIST -->
+                        <div class="meta-line-list user-avatar-list">
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+
+                            <!-- USER AVATAR -->
+                            <div class="user-avatar micro no-stats">
+                                <!-- USER AVATAR BORDER -->
+                                <div class="user-avatar-border">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR BORDER -->
+
+                                <!-- USER AVATAR CONTENT -->
+                                <div class="user-avatar-content">
+                                    <!-- HEXAGON -->
+                                    <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                    <!-- /HEXAGON -->
+                                </div>
+                                <!-- /USER AVATAR CONTENT -->
+                            </div>
+                            <!-- /USER AVATAR -->
+                        </div>
+                        <!-- /META LINE LIST -->
+
+                        <!-- META LINE TEXT -->
+                        <div class="quick-post-footer-actions">
+                            <!-- BUTTON -->
+
+                            <!-- /BUTTON -->
+
+                            <!-- BUTTON -->
+                            <div class="meta-line">
+                                {% if user.id == c.iduser.id %}
+                                    <a href="{{ path('com_modifier', { 'id': c.id }) }}" class="button small void">Modifier com</a>
+
+                                {% else %}
+
+                                {% endif %}
+                                <!-- META LINE LINK -->
+
+                                <!-- /META LINE LINK -->
+                            </div>
+                            <!-- /BUTTON -->
+                        </div>
+                        <!-- /META LINE TEXT -->
+                    </div>
+                    <!-- /META LINE -->
+                </div>
+                <!-- /CONTENT ACTION -->
+
+                <!-- CONTENT ACTION -->
+                <div class="content-action">
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        {% if user.id == c.iduser.id %}
+                            <a href="{{ path('forum_supprimer', { 'id': c.id }) }}" class="button small void">Supprimer</a>
+                        {% else %}
+                        {% endif %}
+                        <!-- META LINE LINK -->
+
+                        <!-- /META LINE LINK -->
+                    </div>
+                    <!-- /META LINE -->
+
+                    <!-- META LINE -->
+                    <div class="meta-line">
+                        <!-- META LINE TEXT -->
+
+                        <!-- /META LINE TEXT -->
+                    </div>
+                    <!-- /META LINE -->
+                </div>
+                <!-- /CONTENT ACTION -->
+            </div>
+            <!-- /WIDGET BOX STATUS CONTENT -->
+        </div>
+        <br>
+
+        <!-- /WIDGET BOX STATUS -->
+
+
+{% endfor %}
+
+        {% if p.resolu == 0 %}
+
+            <form class="form" method="post">
+                <!-- FORM ROW -->
+                <div class="form-row">
+                    <!-- FORM ITEM -->
+                    <div class="form-item">
+                        <!-- FORM TEXTAREA -->
+                        <div class="form-textarea">
+                            <textarea id="quick-post-text" name="Commentaire" placeholder="Hello , tu peux ecrire ici ton comment..." ></textarea>
+                            <!-- FORM TEXTAREA LIMIT TEXT -->
+
+                            <!-- /FORM TEXTAREA LIMIT TEXT -->
+                        </div>
+                        <!-- /FORM TEXTAREA -->
+                    </div>
+                    <!-- /FORM ITEM -->
+                </div>
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list user-avatar-list">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /META LINE LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <div class="quick-post-footer-actions">
+
+                            </div>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <button class="button small void">Commenter</button>
+                            <!-- META LINE LINK -->
+
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE TEXT -->
+
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /FORM ROW -->
+            </form>
+
+        {% else %}
+            <form class="form" method="post">
+                <!-- FORM ROW -->
+                <div class="form-row">
+                    <!-- FORM ITEM -->
+                    <div class="form-item">
+                        <!-- FORM TEXTAREA -->
+                        <div class="form-textarea">
+                            <textarea id="quick-post-text" name="Commentaire" placeholder="probleme resolu..."disabled></textarea>
+                            <!-- FORM TEXTAREA LIMIT TEXT -->
+
+                            <!-- /FORM TEXTAREA LIMIT TEXT -->
+                        </div>
+                        <!-- /FORM TEXTAREA -->
+                    </div>
+                    <!-- /FORM ITEM -->
+                </div>
+                <div class="content-actions">
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE LIST -->
+                            <div class="meta-line-list user-avatar-list">
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/09.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/08.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/12.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/16.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+
+                                <!-- USER AVATAR -->
+                                <div class="user-avatar micro no-stats">
+                                    <!-- USER AVATAR BORDER -->
+                                    <div class="user-avatar-border">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-22-24" style="width: 22px; height: 24px; position: relative;"><canvas width="22" height="24" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR BORDER -->
+
+                                    <!-- USER AVATAR CONTENT -->
+                                    <div class="user-avatar-content">
+                                        <!-- HEXAGON -->
+                                        <div class="hexagon-image-18-20" data-src="img/avatar/06.jpg" style="width: 18px; height: 20px; position: relative;"><canvas width="18" height="20" style="position: absolute; top: 0px; left: 0px;"></canvas></div>
+                                        <!-- /HEXAGON -->
+                                    </div>
+                                    <!-- /USER AVATAR CONTENT -->
+                                </div>
+                                <!-- /USER AVATAR -->
+                            </div>
+                            <!-- /META LINE LIST -->
+
+                            <!-- META LINE TEXT -->
+                            <div class="quick-post-footer-actions">
+
+                            </div>
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+
+                    <!-- CONTENT ACTION -->
+                    <div class="content-action">
+                        <!-- META LINE -->
+                        <div class="meta-line">
+
+                            <!-- META LINE LINK -->
+
+                            <!-- /META LINE LINK -->
+                        </div>
+                        <!-- /META LINE -->
+
+                        <!-- META LINE -->
+                        <div class="meta-line">
+                            <!-- META LINE TEXT -->
+
+                            <!-- /META LINE TEXT -->
+                        </div>
+                        <!-- /META LINE -->
+                    </div>
+                    <!-- /CONTENT ACTION -->
+                </div>
+                <!-- /FORM ROW -->
+            </form>
+        {% endif %}
+
+
+
+
+
+
+
+
+
+{% endblock %}
+    {% block produits %}
+
+
+
+    {% endblock %}
+

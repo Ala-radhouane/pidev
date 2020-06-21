@@ -1,0 +1,379 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+
+
+{% block header %}
+<div class="content-grid">
+ <!-- SECTION BANNER -->
+ <div class="section-banner">
+  <!-- SECTION BANNER ICON -->
+  <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+  <!-- /SECTION BANNER ICON -->
+
+  <!-- SECTION BANNER TITLE -->
+  <p class="section-banner-title">Forums</p>
+  <!-- /SECTION BANNER TITLE -->
+
+  <!-- SECTION BANNER TEXT -->
+  <p class="section-banner-text">Vous trouverer ici toutes les forums!</p>
+  <!-- /SECTION BANNER TEXT -->
+ </div>
+ <!-- /SECTION BANNER -->
+ <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+         <div class="alert alert-success">
+             {% for msg in app.session.flashBag.get('success') %}
+                 {{ msg }}
+             {% endfor %}
+         </div>
+        {% endif %}
+
+    {% endblock %}
+
+    {% endblock %}
+
+    {%  block filter %}
+        <div class="section-filters-bar v7">
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <form method="post">
+            <div class="section-filters-bar-actions">
+                <!-- SECTION FILTERS BAR INFO -->
+                <div class="section-filters-bar-info">
+                    <!-- SECTION FILTERS BAR TITLE -->
+                    <p class="section-filters-bar-title"><a href="forums.html">Forums</a></p>
+                    <!-- /SECTION FILTERS BAR TITLE -->
+
+                    <!-- SECTION FILTERS BAR TEXT -->
+                    <p class="section-filters-bar-text"> <a class="highlighted" href="forums-category.html"></a></p>
+                    <!-- /SECTION FILTERS BAR TEXT -->
+                </div>
+
+                <!-- /SECTION FILTERS BAR INFO -->
+            </div>
+            </form>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+
+            <a href="{{ path('forum_ajouter') }}" class="profile-header-info-action button primary"><span class="hide-text-mobile">Add</span> Forum +</a>
+            <!-- SECTION FILTERS BAR ACTIONS -->
+            <div class="section-filters-bar-actions">
+                <!-- FORM -->
+                <form class="form" method="post">
+                    <!-- FORM ITEM -->
+                    <div class="form-item split">
+                        <!-- FORM INPUT -->
+                        <div class="form-input small">
+                            <label for="forum-search">Search Forums</label>
+                            <input type="text" id="forum-search" name="search">
+                        </div>
+                        <!-- /FORM INPUT -->
+
+                        <!-- BUTTON -->
+                        <button class="button primary">
+                            <!-- ICON MAGNIFYING GLASS -->
+                            <svg class="icon-magnifying-glass">
+                                <use xlink:href="#svg-magnifying-glass"></use>
+                            </svg>
+                            <!-- /ICON MAGNIFYING GLASS -->
+                        </button>
+                        <!-- /BUTTON -->
+                    </div>
+                    <!-- /FORM ITEM -->
+                </form>
+                <!-- /FORM -->
+            </div>
+            <!-- /SECTION FILTERS BAR ACTIONS -->
+        </div>
+
+        <div class="table table-forum-category">
+            <!-- TABLE HEADER -->
+            <div class="table-header">
+                <!-- TABLE HEADER COLUMN -->
+                <div class="table-header-column">
+                    <!-- TABLE HEADER TITLE -->
+                    <p class="table-header-title">Description</p>
+                    <!-- /TABLE HEADER TITLE -->
+                </div>
+                <!-- /TABLE HEADER COLUMN -->
+
+
+
+
+                <!-- TABLE HEADER COLUMN -->
+                <div class="table-header-column centered padded-medium">
+                    <!-- TABLE HEADER TITLE -->
+                    <p class="table-header-title">Posté Par:</p>
+                    <!-- /TABLE HEADER TITLE -->
+                </div>
+                <!-- /TABLE HEADER COLUMN -->
+
+                <!-- TABLE HEADER COLUMN -->
+                <div class="table-header-column padded-big-left">
+                    <!-- TABLE HEADER TITLE -->
+                    <p class="table-header-title">Résolu</p>
+                    <!-- /TABLE HEADER TITLE -->
+                </div>
+                <div class="table-header-column padded-big-left">
+                    <!-- TABLE HEADER TITLE -->
+                    <p class="table-header-title">Note</p>
+                    <!-- /TABLE HEADER TITLE -->
+                </div>
+                <div class="table-header-column padded-big-left">
+                    <!-- TABLE HEADER TITLE -->
+                    <p class="table-header-title">Détails</p>
+                    <!-- /TABLE HEADER TITLE -->
+                </div>
+                <!-- /TABLE HEADER COLUMN -->
+            </div>
+            <!-- /TABLE HEADER -->
+
+            <!-- TABLE BODY -->
+            <div class="table-body">
+
+                {% for p in pubs %}
+                <!-- TABLE ROW -->
+                <div class="table-row big">
+                    <!-- TABLE COLUMN -->
+                    <div class="table-column">
+                        <!-- FORUM CATEGORY -->
+                        <div class="forum-category">
+                            <!-- FORUM CATEGORY IMAGE -->
+
+                            <!-- /FORUM CATEGORY IMAGE -->
+
+                            <!-- FORUM CATEGORY INFO -->
+                            <div class="forum-category-info">
+                                <!-- FORUM CATEGORY TITLE -->
+                                <p class="forum-category-title"><a href="forums-category.html">{{ p.typeChasse }}</a></p>
+                                <!-- /FORUM CATEGORY TITLE -->
+
+                                <!-- FORUM CATEGORY TEXT -->
+                                <p class="forum-category-text">{{ p.description }}</p>
+                                <!-- /FORUM CATEGORY TEXT -->
+                            </div>
+                            <!-- /FORUM CATEGORY INFO -->
+                        </div>
+                        <!-- /FORUM CATEGORY -->
+                    </div>
+                    <!-- /TABLE COLUMN -->
+
+                    <!-- TABLE COLUMN -->
+                    <div class="table-column centered padded-medium">
+                        <!-- TABLE TITLE -->
+                        <p class="table-title">{{ p.idUser.username }}</p>
+                        <!-- /TABLE TITLE -->
+                    </div>
+                    <!-- /TABLE COLUMN -->
+
+                    <!-- TABLE COLUMN -->
+                    <div class="table-column padded-big-left">
+                        <!-- TABLE LINK -->
+                        <a class="table-link" href="forums-discussion.html">
+
+                            {% if p.resolu == 1 %}
+                                <p>resolu</p>
+                            {% else %}
+                                    <p>Pas encore résolu</p>
+                            {% endif %}
+
+                        </a>
+                        <!-- /TABLE LINK -->
+
+
+
+                        <!-- /TABLE LINK -->
+                    </div>
+                    <div class="table-column padded-big-left">
+                        <!-- TABLE LINK -->
+                        <div class="rate">
+                            {% if p.note == 0 %}
+                                <input type="radio" id="star5" name="rate0" value="5"  disabled />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate0" value="4"  disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate0" value="3" disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate0" value="2" disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate0" value="1" disabled />
+                                <label for="star1" title="text"></label>
+                            {% elseif p.note==1 %}
+                                <input type="radio" id="star5" name="rate1" value="5"  disabled />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate1" value="4"  disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate1" value="3" disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate1" value="2" disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate1" value="1" checked disabled />
+                                <label for="star1" title="text"></label>
+                            {% elseif p.note==2 %}
+                                <input type="radio" id="star5" name="rate2" value="5"  disabled />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate2" value="4"  disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate2" value="3" disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate2" value="2"checked disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate2" value="1"  disabled />
+                                <label for="star1" title="text"></label>
+                            {% elseif p.note==3 %}
+                                <input type="radio" id="star5" name="rate3" value="5"  disabled />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate3" value="4"  disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate3" value="3" checked disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate3" value="2" disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate3" value="1"  disabled />
+                                <label for="star1" title="text"></label>
+                            {% elseif p.note==4 %}
+                                <input type="radio" id="star5" name="rate4" value="5"  disabled />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate4" value="4" checked  disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate4" value="3"  disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate4" value="2" disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate4" value="1"  disabled />
+                                <label for="star1" title="text"></label>
+                            {% elseif p.note==5 %}
+                                <input type="radio" id="star5" name="rate5" value="5" checked  />
+                                <label for="star5" title="text"></label>
+                                <input type="radio" id="star4" name="rate5" value="4"   disabled/>
+                                <label for="star4" title="text"></label>
+                                <input type="radio" id="star3" name="rate5" value="3"  disabled />
+                                <label for="star3" title="text"></label>
+                                <input type="radio" id="star2" name="rate5" value="2" disabled/>
+                                <label for="star2" title="text"></label>
+                                <input type="radio" id="star1" name="rate5" value="1"  disabled />
+                                <label for="star1" title="text"></label>
+                            {% endif %}
+
+                        </div>
+                        <!-- /TABLE LINK -->
+
+
+
+                        <!-- /TABLE LINK -->
+                    </div>
+
+
+                    <!-- /TABLE COLUMN -->
+                    <!-- TABLE COLUMN -->
+                    <div class="table-column padded-big-left">
+                        {% if user.id == p.iduser.id %}
+
+                            <!-- TABLE LINK -->
+                            <a class="table-link" href="{{ path('forum_details', { 'id': p.id }) }}">
+
+                                voir details
+
+                            </a>
+
+                            <a class="table-link" href="{{ path('forum_evaluer', { 'id': p.id }) }}">
+
+                                Evaluer
+
+                            </a>
+                            <a class="table-link" href="{{ path('forum_modifier', { 'id': p.id }) }}">
+
+                                Modifier
+
+                            </a>
+                            <a class="table-link" href="{{ path('forum_supprimer', { 'id': p.id }) }}">
+
+                                Supprimer
+
+                            </a>
+
+                        {% else %}
+
+                            <!-- TABLE LINK -->
+                            <a class="table-link" href="{{ path('forum_details', { 'id': p.id }) }}">
+
+                                voir details
+
+                            </a>
+
+                            <a class="table-link" href="{{ path('forum_evaluer', { 'id': p.id }) }}">
+
+                                Evaluer
+
+                            </a>
+
+                            <!-- /TABLE LINK -->
+
+
+                        {% endif %}
+
+
+
+                        <!-- /TABLE LINK -->
+                    </div>
+
+
+                    <!-- /TABLE COLUMN -->
+                </div>
+                <!-- /TABLE ROW -->
+
+                {% endfor %}
+
+
+            </div>
+            <!-- /TABLE BODY -->
+        </div>
+
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px;
+            }
+            .rate:not(:checked) > input {
+                position:absolute;
+                top:-9999px;
+            }
+            .rate:not(:checked) > label {
+                float:right;
+                width:1em;
+                overflow:hidden;
+                white-space:nowrap;
+                cursor:pointer;
+                font-size:30px;
+                color:#ccc;
+            }
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+        </style>
+
+    {% endblock %}
+
+ {% block produits %}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,43 @@
+formation_homepage:
+    path:     /
+    defaults: { _controller: FormationBundle:Default:index }
+
+details_formations:
+    path:     /details/{id}
+    defaults: { _controller: FormationBundle:Default:details }
+
+reserver_formation:
+    path:     /participer/{id}
+    defaults: { _controller: FormationBundle:Default:reserver }
+
+annuler_reservation:
+    path:     /annulerreservation/{id}
+    defaults: { _controller: FormationBundle:Default:annuler }
+
+mes_inscriptions:
+    path:     /mesinscriptions
+    defaults: { _controller: FormationBundle:Default:mesinscriptions }
+
+voir_participants:
+    path:     /participant/{id}
+    defaults: { _controller: FormationBundle:Default:voirparticipants }
+
+back_formations:
+    path:     /backend/formations
+    defaults: { _controller: FormationBundle:Default:backFormations }
+
+back_ajout:
+    path:     /backend/ajouter
+    defaults: { _controller: FormationBundle:Default:ajoutFormations }
+
+back_modifier:
+    path:     /backend/modifier/{id}
+    defaults: { _controller: FormationBundle:Default:modifFormations }
+
+back_supprimer:
+    path:     /backend/supprimer/{id}
+    defaults: { _controller: FormationBundle:Default:supprimer }
+
+back_bane:
+    path:     /backend/bane/{id}
+    defaults: { _controller: FormationBundle:Default:bane }

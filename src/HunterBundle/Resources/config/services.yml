@@ -1,0 +1,4 @@
+services:
+#    hunter.example:
+#        class: HunterBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

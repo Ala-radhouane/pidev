@@ -1,0 +1,258 @@
+{% extends '@Hunt/Default/layout1.html.twig' %}
+{% block header %}
+<div class="content-grid">
+ <!-- SECTION BANNER -->
+ <div class="section-banner">
+  <!-- SECTION BANNER ICON -->
+  <img class="section-banner-icon" src="{{   asset('template/img/banner/events-icon.png')}}" alt="events-icon">
+  <!-- /SECTION BANNER ICON -->
+
+  <!-- SECTION BANNER TITLE -->
+  <p class="section-banner-title">Réserver un produit</p>
+  <!-- /SECTION BANNER TITLE -->
+
+  <!-- SECTION BANNER TEXT -->
+  <p class="section-banner-text"> ici vous pouvez réserver le produit choisi !</p>
+  <!-- /SECTION BANNER TEXT -->
+ </div>
+ <!-- /SECTION BANNER -->
+ <br><br>
+    {% block flash %}
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if app.session.flashBag.has('error') %}
+            <div class="alert alert-danger">
+                {% for msg in app.session.flashBag.get('error') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
+    {% endblock %}
+
+    {%  block filter %}
+
+
+    {% endblock %}
+
+
+    {% block reclamer %}
+
+        <div class="grid-column">
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                <!-- WIDGET BOX SETTINGS -->
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap" style="position: relative;">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown" style="position: absolute; z-index: 9999; top: 30px; right: 9px; opacity: 0; visibility: hidden; transform: translate(0px, -20px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <p class="simple-dropdown-link">Widget Settings</p>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                <!-- /WIDGET BOX SETTINGS -->
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Produit sélectionné</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- PARAGRAPH -->
+                    <p class="paragraph"></p>
+                    <!-- /PARAGRAPH -->
+
+                    <!-- INFORMATION LINE LIST -->
+                    <div class="information-line-list">
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Titre:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ p.titre }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Quantité:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ p.quantite - p.nbr }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Prix:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ p.prix }}</p> <br>
+
+
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <p class="information-line-text">Réseaux sociaux : {{ socialButtons( {'googleplus':false, 'twitter':false, 'linkedin':false} ) }}</p>
+                        <!-- /INFORMATION LINE -->
+
+
+
+                    </div>
+                    <!-- /INFORMATION LINE LIST -->
+                </div>
+                <!-- /WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
+
+            <br><br>
+            <!-- WIDGET BOX -->
+            <div class="widget-box">
+                <!-- WIDGET BOX SETTINGS -->
+                <div class="widget-box-settings">
+                    <!-- POST SETTINGS WRAP -->
+                    <div class="post-settings-wrap" style="position: relative;">
+                        <!-- POST SETTINGS -->
+                        <div class="post-settings widget-box-post-settings-dropdown-trigger">
+                            <!-- POST SETTINGS ICON -->
+                            <svg class="post-settings-icon icon-more-dots">
+                                <use xlink:href="#svg-more-dots"></use>
+                            </svg>
+                            <!-- /POST SETTINGS ICON -->
+                        </div>
+                        <!-- /POST SETTINGS -->
+
+                        <!-- SIMPLE DROPDOWN -->
+                        <div class="simple-dropdown widget-box-post-settings-dropdown" style="position: absolute; z-index: 9999; top: 30px; right: 9px; opacity: 0; visibility: hidden; transform: translate(0px, -20px); transition: transform 0.3s ease-in-out 0s, opacity 0.3s ease-in-out 0s, visibility 0.3s ease-in-out 0s;">
+                            <!-- SIMPLE DROPDOWN LINK -->
+                            <p class="simple-dropdown-link">Widget Settings</p>
+                            <!-- /SIMPLE DROPDOWN LINK -->
+                        </div>
+                        <!-- /SIMPLE DROPDOWN -->
+                    </div>
+                    <!-- /POST SETTINGS WRAP -->
+                </div>
+                <!-- /WIDGET BOX SETTINGS -->
+
+                <!-- WIDGET BOX TITLE -->
+                <p class="widget-box-title">Formulaire de reservation:</p>
+                <!-- /WIDGET BOX TITLE -->
+
+                <!-- WIDGET BOX CONTENT -->
+                <div class="widget-box-content">
+                    <!-- INFORMATION LINE LIST -->
+                    <div class="information-line-list">
+                        <form method="post">
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Email :</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ user.email }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Username:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <p class="information-line-text">{{ user.username }}</p>
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Quantité:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <input type="number" id="forum-search" name="quantite" min="0"  placeholder="choisir la quantité">
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Date Debut:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <input type="date" id="forum-search" value="{{ date }}" name="date_debut" >
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+                            <!-- INFORMATION LINE TITLE -->
+                            <p class="information-line-title">Date Fin:</p>
+                            <!-- /INFORMATION LINE TITLE -->
+
+                            <!-- INFORMATION LINE TEXT -->
+                            <input type="date" id="forum-search" name="date_fin" >
+                            <!-- /INFORMATION LINE TEXT -->
+                        </div>
+                        <!-- /INFORMATION LINE -->
+
+                                <button class="button small secondary">reserver</button>
+
+
+
+                        </form>
+                        <!-- INFORMATION LINE -->
+                        <div class="information-line">
+
+                        </div>
+                        <!-- /INFORMATION LINE -->
+                    </div>
+                    <!-- /INFORMATION LINE LIST -->
+                </div>
+                <!-- /WIDGET BOX CONTENT -->
+            </div>
+            <!-- /WIDGET BOX -->
+        </div>
+
+    {% endblock %}
+
+
+    {% block produits %}
+
+    {% endblock %}
+
+

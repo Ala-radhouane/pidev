@@ -1,0 +1,58 @@
+hunter_homepage:
+    path:     /
+    defaults: { _controller: HunterBundle:Default:index }
+
+hunter_addproduct:
+    path:     /add
+    defaults: { _controller: HunterBundle:Product:addproduct }
+
+hunter_afficher:
+    path:     /listeproduit
+    defaults: { _controller: HunterBundle:Product:viewproduit }
+
+hunter_editproduct:
+    path:     /editproduit/{id}
+    defaults: { _controller: HunterBundle:Product:editproduct }
+
+hunter_supprimerProduits:
+    path:     /listeproduit/{id}
+    defaults: { _controller: HunterBundle:Product:deleteproduit }
+
+hunter_produitsHorsStock:
+    path:     /produitsHorsStock
+    defaults: { _controller: HunterBundle:Product:produitsHorsStock }
+
+
+hunter_produitsEnReptureDeStock:
+    path:     /produitsEnReptureDeStock
+    defaults: { _controller: HunterBundle:Product:produitsEnReptureDeStock }
+
+
+hunter_shop:
+    path:     /shop
+    defaults: { _controller: HunterBundle:Product:Shop }
+
+hunter_detail:
+    path:     /detail/{id}
+    defaults: { _controller: HunterBundle:Product:Detail }
+
+hunter_chart:
+    path:     /chart/{id}
+    defaults: { _controller: HunterBundle:Product:Chart }
+
+hunter_chartdata:
+    path:     /chart
+    defaults: { _controller: HunterBundle:Product:Chartdata }
+
+hunter_chartremove:
+    path:     /chart/remove/{id}
+    defaults: { _controller: HunterBundle:Product:Chartremove }
+
+hunter_livraison:
+    path:     /livraison
+    defaults: { _controller: HunterBundle:Livraison:addlivraison }
+
+hunter_adresseremove:
+    path:     /livraison/{id}
+    defaults: { _controller: HunterBundle:Livraison:removeadresse }
+

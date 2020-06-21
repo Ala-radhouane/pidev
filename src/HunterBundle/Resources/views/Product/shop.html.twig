@@ -1,0 +1,21 @@
+{% extends "@Hunter/Default/index.html.twig" %}
+{% block container %}
+<h1>Shop</h1>
+
+    {% for product in products %}
+        <div class="product-preview" >
+
+           <a href="{{ path('hunter_detail',{'id':product.id}) }}"> <img src="{{ asset('images/') }}{{ product.nomImage }}"style="width: 250px;height: 250px"></a>
+           Name Product : {{ product.name }} <br>
+
+       Price : {{ product.price }} TND <br>
+        Stock : {{ product.stock }} <br>
+        Category : {{ product.category }} <br>
+
+            <a class="button primary" href="{{ path( 'hunter_chart',{'id':product.id }) }}" >Ajouter au panier</a>
+        </div>
+
+
+    {% endfor %}
+
+{% endblock %}
